@@ -1,0 +1,9 @@
+import geopandas as gpd
+import glob
+
+shape_files = glob.glob("Polygon*.shp")
+for i in shape_files:
+    shape = gpd.read_file(i)
+    shape.to_crs({'init': 'epsg:26715'})
+    output=(str(i)+"_new.shp")
+    shape.to_file(driver = 'ESRI Shapefile', filename=output)
